@@ -15,28 +15,25 @@ public class TripBooking {
     private TripStatus tripStatus;
     private int bill;
 
-    @ManyToOne
-    @JoinColumn
-    private Customer customer;
-
-    @ManyToOne
-    @JoinColumn
-    private Driver driver;
+//    @ManyToOne
+//    @JoinColumn
+//    private Customer customer;
+//
+//    @ManyToOne
+//    @JoinColumn
+//    private Driver driver;
 
     public TripBooking() {
     }
 
-    public TripBooking(int tripBookingId, String fromLocation, String toLocation, int distanceInKm, TripStatus tripStatus, int bill, Customer customer, Driver driver) {
+    public TripBooking(int tripBookingId, String fromLocation, String toLocation, int distanceInKm, TripStatus tripStatus, int bill) {
         this.tripBookingId = tripBookingId;
         this.fromLocation = fromLocation;
         this.toLocation = toLocation;
         this.distanceInKm = distanceInKm;
         this.tripStatus = tripStatus;
         this.bill = bill;
-        this.customer = customer;
-        this.driver = driver;
     }
-
 
     public int getTripBookingId() {
         return tripBookingId;
@@ -84,21 +81,5 @@ public class TripBooking {
 
     public void setBill(int bill) {
         this.bill = bill;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Driver getDriver() {
-        return driver;
-    }
-
-    public void setDriver(Driver driver) {
-        this.driver = driver;
     }
 }
