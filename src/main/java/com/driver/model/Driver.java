@@ -3,34 +3,40 @@ package com.driver.model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
 @Entity
+@Table(name = "driver")
 public class Driver {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int driverId;
-    private String mobile;
-    private String password;
-    @OneToOne(mappedBy = "driver", cascade = CascadeType.ALL)
+    String mobile;
+    String password;
+    @OneToMany(mappedBy = "driver",cascade = CascadeType.ALL)
+    List<TripBooking> tripBookingList=new ArrayList<>();
+    @OneToOne(mappedBy = "driver",cascade = CascadeType.ALL)
     private Cab cab;
-
-    @OneToMany(mappedBy = "driver", cascade = CascadeType.ALL)
-    private List<TripBooking> tripBookingList = new ArrayList<>();
 
     public Driver() {
     }
 
-    public Driver(int driverId, String mobile, String password) {
-        this.driverId = driverId;
+    public Driver(String mobile, String password) {
         this.mobile = mobile;
         this.password = password;
     }
 
-    public Driver(int driverId, String mobile, String password, Cab cab, List<TripBooking> tripBookingList) {
-        this.driverId = driverId;
-        this.mobile = mobile;
-        this.password = password;
+    public Cab getCab() {
+        return cab;
+    }
+
+    public void setCab(Cab cab) {
         this.cab = cab;
+    }
+
+    public List<TripBooking> getTripBookingList() {
+        return tripBookingList;
+    }
+
+    public void setTripBookingList(List<TripBooking> tripBookingList) {
         this.tripBookingList = tripBookingList;
     }
 
@@ -56,21 +62,5 @@ public class Driver {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Cab getCab() {
-        return cab;
-    }
-
-    public void setCab(Cab cab) {
-        this.cab = cab;
-    }
-
-    public List<TripBooking> getTripBookingList() {
-        return tripBookingList;
-    }
-
-    public void setTripBookingList(List<TripBooking> tripBookingList) {
-        this.tripBookingList = tripBookingList;
     }
 }

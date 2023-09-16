@@ -3,6 +3,7 @@ package com.driver.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "tripbooking")
 public class TripBooking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -10,29 +11,40 @@ public class TripBooking {
     private String fromLocation;
     private String toLocation;
     private int distanceInKm;
-
-//    @Enumerated(EnumType.STRING)
-    private TripStatus tripStatus;
+    @Enumerated(value = EnumType.STRING)
+    private TripStatus status;
     private int bill;
+    @ManyToOne
+    @JoinColumn
+    private Driver driver;
 
-//    @ManyToOne
-//    @JoinColumn
-//    private Customer customer;
-//
-//    @ManyToOne
-//    @JoinColumn
-//    private Driver driver;
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    @ManyToOne
+    @JoinColumn
+    private Customer customer;
 
     public TripBooking() {
     }
 
-    public TripBooking(int tripBookingId, String fromLocation, String toLocation, int distanceInKm, TripStatus tripStatus, int bill) {
-        this.tripBookingId = tripBookingId;
+    public TripBooking(String fromLocation, String toLocation, int distanceInKm) {
         this.fromLocation = fromLocation;
         this.toLocation = toLocation;
         this.distanceInKm = distanceInKm;
-        this.tripStatus = tripStatus;
-        this.bill = bill;
     }
 
     public int getTripBookingId() {
@@ -67,12 +79,12 @@ public class TripBooking {
         this.distanceInKm = distanceInKm;
     }
 
-    public TripStatus getTripStatus() {
-        return tripStatus;
+    public TripStatus getStatus() {
+        return status;
     }
 
-    public void setTripStatus(TripStatus tripStatus) {
-        this.tripStatus = tripStatus;
+    public void setStatus(TripStatus status) {
+        this.status = status;
     }
 
     public int getBill() {
