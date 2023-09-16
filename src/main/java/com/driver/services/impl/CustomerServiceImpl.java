@@ -59,7 +59,7 @@ public class CustomerServiceImpl implements CustomerService {
 		List<Driver> driverList = driverRepository2.findAll();
 		Boolean driverIsAvailable = false;
 		for(Driver d : driverList) {
-			if(d.getCab().isAvailable() && d.getDriverId() < minDriverId) {
+			if(d.getCab().getAvailable() && d.getDriverId() < minDriverId) {
 				driver = d;
 				minDriverId = d.getDriverId();
 				driverIsAvailable = true;
